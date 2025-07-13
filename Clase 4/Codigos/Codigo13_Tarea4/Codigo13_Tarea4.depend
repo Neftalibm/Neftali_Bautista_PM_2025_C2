@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1752434630 source:c:\users\nefco\documents\new folder\codigo13_tarea4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

@@ -3,11 +3,9 @@
 int main() {
 int NUM;
 
-// Leer número
 printf("Ingrese un numero entero positivo: ");
 scanf("%d", &NUM);
 
-// Validar que el número sea mayor que 2
 if (NUM <= 2) {
 printf("No hay numeros primos menores que %d.\n", NUM);
 }
