@@ -1,20 +1,17 @@
 #include <stdio.h>
-/* Suma pagos.
-El programa obtiene la suma de los pagos realizados el último mes.
-PAG y SPA: variables de tipo real.*/
+#include <stdlib.h>
+
 int main()
 {
-float PAG, SPA = 0;
-printf("Ingrese el primer pago:\t");
-scanf("%f", &PAG);
-/* Observa que al utilizar la estructura do-while al menos se necesita un pago.*/
-do
-{
-SPA = SPA + PAG;
-printf("Ingrese el siguiente pago -0 para terminar-:\t ");
-scanf("%f", &PAG);
+float PAGO, SPA = 0;
+printf("ingrese el primer pago:\t");
+scanf("%f", &PAGO);
+do {
+    SPA = SPA + PAGO;
+    printf("Ingrese el siguiente pago -0 para terminar-\t ");
+    scanf("%f", &PAGO);
 }
-while (PAG);
-printf("\nEl total de pagos del mes es: %.2f", SPA);
-return(0);
+while (PAGO);
+printf("\nEl total de pagos del mes: %.2f", SPA);
+    return 0;
 }

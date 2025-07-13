@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1752377064 source:c:\users\nefco\documents\new folder\codigo15_tarea3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

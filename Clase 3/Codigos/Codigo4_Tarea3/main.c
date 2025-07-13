@@ -1,23 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
-/* Suma cuadrados.
-El programa, al recibir como datos un grupo de enteros positivos, obtiene el
-cuadrado de los mismos y la suma correspondiente a dichos cuadrados. */
+
 int main()
 {
-int NUM;
-long CUA, SUC = 0;
+int NUMERO;
+long CUADRADO, SUMCUA=0;
 printf("\nIngrese un numero entero -0 para terminar-:\t");
-scanf("%d", &NUM);
-while (NUM)
-/* Observa que la condición es verdadera mientras el entero es diferente de cero. */
-{
-CUA = pow (NUM, 2);
-printf("%d al cubo es %ld", NUM, CUA);
-SUC = SUC + CUA;
-printf("\nIngrese un numero entero -0 para terminar-:\t");
-scanf("%d", &NUM);
+scanf("%d", &NUMERO);
+while (NUMERO) {
+    CUADRADO = pow (NUMERO, 2);
+    printf("%d al cubo es %ld\n3", NUMERO, CUADRADO);
+    SUMCUA = SUMCUA + CUADRADO;
+    printf("ingrese un numero entero -0 para terminar-:\t");
+    scanf("%d", &NUMERO);
 }
-printf("\nLa suma de los cuadrados es %ld", SUC);
-return(0);
+printf("\nLa suma de los cuadrados es %ld", SUMCUA);
+    return 0;
 }

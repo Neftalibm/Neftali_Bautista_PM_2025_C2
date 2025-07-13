@@ -5,7 +5,6 @@ int main() {
 int T, P, R;
 int expresion;
 
-// Se limita el rango de búsqueda para evitar cálculos innecesarios
 for (T = 1; T <= 10; T++) {
     for (P = 1; P <= 20; P++) {
     for (R = 1; R <= 5; R++) {

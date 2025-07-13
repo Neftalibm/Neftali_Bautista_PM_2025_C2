@@ -1,22 +1,17 @@
 #include <stdio.h>
-/* Suma pagos.
-El programa, al recibir como datos un conjunto de pagos realizados en el último
-mes, obtiene la suma de los mismos.
-PAG y SPA: variables de tipo real. */
+#include <stdlib.h>
+
 int main()
 {
-float PAG, SPA;
+float PAGO, SPA;
 SPA = 0;
-printf("Ingrese el primer pago:\t");
-scanf("%f", &PAG);
-while (PAG)
-/* Observa que la condición es verdadera mientras el pago es diferente de cero. */
-{
-SPA = SPA + PAG;
-printf("Ingrese el siguiente pago:\t ");
-scanf("%f", &PAG);
-/* Observa que la proposición que modifica la condición es una lectura. */
+printf("ingrese el primer pago:\t");
+scanf("%f", &PAGO);
+while (PAGO){
+    SPA=SPA+PAGO;
+    printf("Ingrese el siguiente pago:\t ");
+    scanf("%f,", &PAGO);
 }
 printf("\nEl total de pagos del mes es: %.2f", SPA);
-return(0);
+    return 0;
 }

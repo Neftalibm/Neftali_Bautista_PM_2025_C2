@@ -14,11 +14,13 @@ printf("L4: "); scanf("%f", &L4);
 printf("L5: "); scanf("%f", &L5);
 printf("L6: "); scanf("%f", &L6);
 
-printf("\nIngrese las ventas (CLA CAN), termine con 0 0:\n");
+printf("\nIngrese las ventas:\n");
 
 while (1) {
-    printf("Venta: ");
-    scanf("%d %d", &CLA, &CAN);
+    printf("Lugar de venta: ");
+    scanf("%d", &CLA);
+     printf("Cuantas ventas: ");
+    scanf("%d", &CAN);
 
     if (CLA == 0 && CAN == 0)
             break;
@@ -42,7 +44,7 @@ while (1) {
         b6 += CAN;
         total += L6 * CAN;
     } else {
-        printf("Localidad inválida. Use números del 1 al 6.\n");
+        printf("Localidad invalida. Use numeros del 1 al 6.\n");
     }
 }
 
@@ -53,7 +55,7 @@ printf("L3: %d\n", b3);
 printf("L4: %d\n", b4);
 printf("L5: %d\n", b5);
 printf("L6: %d\n", b6);
-printf("Recaudación total: $%.2f\n", total);
+printf("Recaudacion total: $%.2f\n", total);
 
 return 0;
 }

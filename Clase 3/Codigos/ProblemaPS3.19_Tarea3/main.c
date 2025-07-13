@@ -1,25 +1,31 @@
 #include <stdio.h>
 
 int main() {
-int i, j, N = 10;
+    int i, j, N;
 
-for (i = 1; i <= N; i++) {
-    int num = i;
+    printf("Ingrese el numero de filas: ");
+    scanf("%d", &N);
 
-// Parte ascendente
-for (j = 1; j <= i; j++) {
-    printf("%d ", num % 10);
-    num++;
+    for (i = 1; i <= N; i++) {
+        for (j = 1; j <= N - i; j++) {
+            printf("  ");
         }
 
-// Parte descendente
-num -= 2; // Regresamos dos pasos: uno extra porque ya se incrementó en el último ciclo
-for (j = 1; j < i; j++) {
-printf("%d ", num % 10);
-num--;
-}
-printf("\n");
+        int num = i;
+
+        for (j = 1; j <= i; j++) {
+            printf("%d ", num % 10);
+            num++;
+        }
+
+        num -= 2;
+        for (j = 1; j < i; j++) {
+            printf("%d ", num % 10);
+            num--;
+        }
+
+        printf("\n");
     }
 
-return 0;
+    return 0;
 }

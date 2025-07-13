@@ -1,20 +1,15 @@
 #include <stdio.h>
-/* Nómina.
-El programa, al recibir los salarios de 15 profesores, obtiene el total de la
-nómina de la universidad.
-I: variable de tipo entero.
-SAL y NOM: variables de tipo real. */
 int main()
 {
 int I;
-float SAL, NOM;
-NOM = 0;
-for (I=1; I<=15; I++)
+float SALARIO, NOMINA;
+NOMINA = 0;
+for (I=1; I<=5; I++)
 {
-printf("\Ingrese el salario del profesor%d:\t", I);
-scanf("%f", &SAL);
-NOM = NOM + SAL;
+    printf("\Ingrese el salario del maestro%d:\t", I);
+    scanf("%f", &SALARIO);
+    NOMINA = NOMINA+SALARIO;
 }
-printf("\nEl total de la nomina es: %.2f", NOM);
+printf("\nEl total de la nomina es %.2f", NOMINA);
 return(0);
 }

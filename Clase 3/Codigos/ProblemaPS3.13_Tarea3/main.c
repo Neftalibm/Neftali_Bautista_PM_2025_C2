@@ -3,8 +3,7 @@
 // Función que determina si n es primo y guarda el resultado en *resultado
 void esPrimo(int n, int *resultado) {
 int i;
-*resultado = 1;  // asumimos que es primo
-
+*resultado = 1;
 if (n < 2) {
     *resultado = 0;
 } else {

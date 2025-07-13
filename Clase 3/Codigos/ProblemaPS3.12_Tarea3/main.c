@@ -14,7 +14,6 @@ printf("No hay numeros primos menores que %d.\n", NUM);
 else {
     printf("Numeros primos menores que %d:\n", NUM);
 
-// Probar todos los números desde 2 hasta NUM-1
     for (int i = 2; i < NUM; i++) {
     int esPrimo = 1; // Asumimos que i es primo
     for (int j = 2; j * j <= i; j++) {
