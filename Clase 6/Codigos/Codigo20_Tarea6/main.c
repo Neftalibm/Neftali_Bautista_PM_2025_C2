@@ -1,57 +1,25 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
-void intercambia(char FRA[][30], int); /* Prototipo de funcion. */
+void inverso(char*);
 
-int main(void)
+void main(void)
 {
-    int i, n;
-    char FRA[20][30];
 
-    printf("\nIngrese el numero de filas del arreglo: ");
-    scanf("%d", &n);
-    getchar(); // Limpiar el salto de linea pendiente
-
-    for (i = 0; i < n; i++)
-    {
-        printf("Ingrese la linea de texto numero %d: ", i + 1);
-        fgets(FRA[i], sizeof(FRA[i]), stdin);
-
-        // Eliminar el salto de linea si existe
-        int j = 0;
-        while (FRA[i][j] != '\0') {
-            if (FRA[i][j] == '\n') {
-                FRA[i][j] = '\0';
-                break;
-            }
-            j++;
-        }
-    }
-
-    printf("\n\n");
-    intercambia(FRA, n);
-
-    for (i = 0; i < n; i++)
-    {
-        printf("Impresion de la linea de texto %d: ", i + 1);
-        puts(FRA[i]);
-    }
-
-    return 0;
+    char fra[50];
+    printf("\nIngrese la linea de texto: ");
+    gets(fra);
+    printf("\nEscribe la linea de texto en forma inversa: ");
+    inverso(fra);
 }
 
-void intercambia(char FRA[][30], int n)
-/* Esta funcion intercambia las filas del arreglo. */
+void inverso(char *cadena)
 {
-    int i, j;
-    j = n - 1;
-    char cad[30];
-
-    for (i = 0; i < (n / 2); i++)
+if(cadena[0] != '\0')
     {
-        strcpy(cad, FRA[i]);
-        strcpy(FRA[i], FRA[j]);
-        strcpy(FRA[j], cad);
-        j--;
+
+        inverso(&cadena[1]);
+        putchar(cadena[0]);
     }
 }
+

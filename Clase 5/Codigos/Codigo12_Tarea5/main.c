@@ -1,26 +1,56 @@
 #include <stdio.h>
-/* Apuntadores y arreglos */
-void main(void)
+#include <stdlib.h>
+
+const int MAX=100;
+
+void Lectura(int *, int);
+void Ordena(int *, int);
+void Imprime(int *, int);
+
+int main()
 {
-int V1[4] = {1, 3, 5, 7}, V2[4] = {2, 4};
-int *AX, *AY;
+int TAM, VEC[MAX];
+do
+{
+    printf("Ingrese el tamanho del arreglo: ");
+    scanf("%d", &TAM);
+}
+while (TAM>MAX|| TAM<1);
 
-AX = &V1[2];
-AY = &V2[2];
+Lectura(VEC, TAM);
+Ordena(VEC, TAM);
+Imprime(VEC, TAM);
+}
 
-V2[2] = *(AX + 1);
-V2[3] = *AX;
-AX = AX + 1;
-V1[0] = *AX;
+void Lectura(int A[], int T)
+{
+int I;
+for (I=0; I<T; I++)
+{
+    printf("Ingrese el elemento %d: ", I + 1);
+    scanf("%d", &A[I]);
+}
+}
 
-printf("\nV1[0]=%d V1[1]=%d V1[2]=%d V1[3]=%d \tV2[0]=%d V2[1]=%d V2[2]=%d V2[3]=%d",
-        V1[0], V1[1], V1[2], V1[3], V2[0], V2[1], V2[2], V2[3]);
+void Imprime(int A[], int T)
+{
+int I;
+for (I=0; I<T; I++)
+    printf("\nA[%d]: %d", I, A[I]);
+}
 
-V1[2] = *AY;
-V1[1] = --*AY;
-AX = AX + 1;
-V1[3] = *AX;
-
-printf("\nV1[0]=%d V1[1]=%d V1[2]=%d V1[3]=%d \tV2[0]=%d V2[1]=%d V2[2]=%d V2[3]=%d",
-        V1[0], V1[1], V1[2], V1[3], V2[0], V2[1], V2[2], V2[3]);
+void Ordena(int A[], int T)
+{
+int AUX, L, I;
+for (I=1; I<T; I++)
+{
+    AUX = A[I];
+    L=I-1;
+    while((L>=0)&& (AUX<A[L]))
+    {
+        A[L+1]=A[L];
+        L--;
+    }
+    A[L+1]=AUX;
+}
 }

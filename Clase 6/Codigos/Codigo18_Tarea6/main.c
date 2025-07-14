@@ -1,51 +1,25 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-/* Cuenta palabras.
-El programa calcula el numero de palabras que hay en la cadena de caracteres. */
 
-int cuentap(char *); /* Prototipo de funcion. */
-
-int main(void)
+void main(void)
 {
-    int i;
-    char fra[50];
-    printf("\nIngrese la linea de texto: ");
-    fgets(fra, sizeof(fra), stdin);
 
-    // Eliminar salto de linea si existe
-    int j = 0;
-    while (fra[j] != '\0') {
-        if (fra[j] == '\n') {
-            fra[j] = '\0';
-            break;
-        }
-        j++;
-    }
+ char cad1[50], cad2[50], *cad0 = "";
+ int i = 0;
+ printf("\n Ingrese la primera cadena de caracteres: ");
+ gets(cad1);
+ printf("\n Ingrese la cadena a buscar: ");
+ gets(cad2);
+ strcpy(cad0, cad1);
+ cad0 = strstr(cad0, cad2);
+ while(cad0 != NULL)
+ {
 
-    strcat(fra, " "); // Se agrega un espacio al final de la cadena
-    i = cuentap(fra);
-    printf("\nLa linea de texto tiene %d palabras\n", i);
-
-    return 0;
+  i++;
+  cad0 = strstr(cad0 + 1, cad2);
+ }
+ printf("\nEl numero de veces que aparece la segunda cadena es: %d", i);
 }
 
-int cuentap(char *cad)
-/* La funcion cuenta el numero de palabras que hay en la cadena de caracteres. */
-{
-    int i = 0, palabras = 0;
-    int en_palabra = 0;
-
-    while (cad[i] != '\0') {
-        if (!isspace(cad[i])) {
-            if (!en_palabra) {
-                palabras++;
-                en_palabra = 1;
-            }
-        } else {
-            en_palabra = 0;
-        }
-        i++;
-    }
-    return palabras;
-}
+//ni siquiera estoy seguro exactamente como funciona esto, lo tuve que hacer con ayuda directa del libro e internet

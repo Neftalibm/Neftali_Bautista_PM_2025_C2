@@ -1,48 +1,41 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-/* Primos.
-El programa almacena en un arreglo unidimensional los primeros 100 números primos. */
-
-const int TAM = 10;
-
-void Imprime(int[], int);     /* Prototipos de funciones. */
-void Primo(int, int *);
-
-void main(void)
+int main()
 {
-    int P[TAM] = {1, 2};
-    int FLA, J = 2, PRI = 3;
+int X=3, Y=7, Z[5]={2,4,6,8,10};
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
+int *IX;
+IX=&X;
+Y=*IX;
+*IX=1;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
+IX=&Z[2];
+Y=*IX;
+*IX=15;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
+X=*IX+5;
+*IX=*IX - 5;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
+++*IX;
+*IX += 1;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
 
-    while (J <= TAM)
-    {
-        FLA = 1;
-        Primo(PRI, &FLA);  /* Se llama a la función que determina si PRI es primo. */
-        if (FLA)           /* Si FLA es 1, entonces PRI es primo. */
-        {
-            P[J] = PRI;
-            J++;
-        }
-        PRI += 2;
-    }
-    Imprime(P, TAM);
-}
+X= *(IX +1);
+Y= *IX;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
 
-void Primo(int A, int *B)
-/* Esta función determina si A es primo, en cuyo caso el valor de *B no se altera. */
-{
-    int DI = 3;
-    while (*B && (DI < (A / 2)))
-    {
-        if ((A % DI) == 0)
-            *B = 0;
-        DI++;
-    }
-}
+IX=IX+1;
+Y = *IX;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
+IX=IX+4;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
 
-void Imprime(int Primos[], int T)
-/* Esta función imprime el arreglo unidimensional de números primos. */
-{
-    int I;
-    for (I = 0; I < T; I++)
-        printf("\nPrimos[%d]: %d", I, Primos[I]);
+IX=&X;
+IX=IX+1;
+X= *IX;
+printf("\nX = %d \t Y = %d \t Z[0] = %d \t Z[3] = %d \t Z[4] = %d", X, Y, Z[0], Z[1], Z[2], Z[3], Z[4]);
+
+
+    return 0;
 }

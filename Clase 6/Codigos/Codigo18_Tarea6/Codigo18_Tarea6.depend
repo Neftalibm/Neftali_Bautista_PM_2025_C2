@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1752478840 source:c:\users\nefco\documents\new folder\codigo18_tarea6\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

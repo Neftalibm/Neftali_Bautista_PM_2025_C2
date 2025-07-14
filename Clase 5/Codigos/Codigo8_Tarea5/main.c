@@ -1,62 +1,44 @@
-#include <stdio.h>  /* Ordenación por selección directa. */
+#include <stdio.h>
+#include <stdlib.h>
 
-const int MAX = 100;
+#define TAM 100 //no funciona con const int
 
-void Lectura(int *, int);
-void Ordena(int *, int); /* Prototipos de funciones */
-void Imprime(int *, int);
+void Imprime(int[], int);
+void Primo(int, int *);
 
-void main(void)
+int main()
 {
-    int TAM, VEC[MAX];
-    do
+int P[TAM]={1,2};
+int FLA, J = 2, PRI = 3;
+while (J <= TAM)
+{
+    FLA = 1;
+    Primo(PRI, &FLA);
+    if(FLA)
     {
-        printf("Ingrese el tamanho del arreglo: ");
-        scanf("%d", &TAM);
+        P[J]=PRI;
+        J++;
     }
-    while (TAM > MAX || TAM < 1);  /* Se verifica que el tamaño del arreglo sea correcto. */
-
-    Lectura(VEC, TAM);
-    Ordena(VEC, TAM);
-    Imprime(VEC, TAM);
+    PRI += 2;
+}
+Imprime(P, TAM);
+    return 0;
 }
 
-void Lectura(int A[], int T)
-/* La función Lectura se utiliza para leer un arreglo unidimensional de T elementos de tipo entero. */
+void Primo(int A, int *B)
 {
-    int I;
-    for (I = 0; I < T; I++)
-    {
-    printf("Ingrese el elemento %d: ", I + 1);
-    scanf("%d", &A[I]);
-    }
+int DI=3;
+while (*B&&(DI<(A/2)))
+{
+    if((A%DI)==0)
+        *B=0;
+}
 }
 
-void Imprime(int A[], int T)
-/* Esta función se utiliza para escribir un arreglo unidimensional ordenado de T elementos de tipo entero. */
+void Imprime(int Primos[], int T)
 {
 int I;
-for (I = 0; I < T; I++)
-    printf("\nA[%d]: %d", I, A[I]);
-}
-
-void Ordena(int A[], int T)
-/* La función Ordena utiliza el método de selección directa para ordenar los elementos del arreglo unidimensional A. */
-{
-int I, J, MEN, L;
-for (I = 0; I < (T - 1); I++)
-{
-    MEN = A[I];
-    L = I;
-    for (J = I + 1; J < T; J++)
-    {
-        if (A[J] < MEN)
-        {
-            MEN = A[J];
-            L = J;
-        }
-    }
-    A[L] = A[I];
-    A[I] = MEN;
-}
+for (I=0; I<T; I++)
+printf("\nPrimos[%d]: %d", I, Primos[I]);
+//no entiendo porque aparece todo en gris
 }

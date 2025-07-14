@@ -1,58 +1,60 @@
-#include <stdio.h>  /* Ordenación por inserción directa. */
-
-const int MAX = 10;
+#include <stdio.h>
+#include <stdlib.h>
 
 void Lectura(int *, int);
-void Ordena(int *, int); /* Prototipos de funciones */
 void Imprime(int *, int);
+void Elimina(int *, int *);
 
-void main(void)
+int main()
 {
-    int TAM, VEC[MAX];
-    do
-    {
-        printf("Ingrese el tamanho del arreglo: ");
-        scanf("%d", &TAM);
-    }
-    while (TAM > MAX || TAM < 1);  /* Se verifica que el tamaño del arreglo sea correcto. */
-
-    Lectura(VEC, TAM);
-    Ordena(VEC, TAM);
-    Imprime(VEC, TAM);
+int TAM, ARRE[10];
+do
+{
+    printf("Ingrese el size del arreglo: ");
+    scanf("%d", &TAM);
+}
+while (TAM>100 || TAM<1);
+Lectura(ARRE, TAM);
+Elimina(ARRE, &TAM);
+Imprime(ARRE, TAM);
 }
 
 void Lectura(int A[], int T)
-/* La función Lectura se utiliza para leer un arreglo unidimensional de T elementos de tipo entero. */
 {
-    int I;
-    for (I = 0; I < T; I++)
-    {
-        printf("Ingrese el elemento %d: ", I + 1);
-        scanf("%d", &A[I]);
-    }
+printf("\n");
+int I;
+for (I=0; I<T; I++)
+{
+    printf("Ingrese el elemento %d: ", I+1);
+    scanf("%d", &A[I]);
+}
 }
 
 void Imprime(int A[], int T)
-/* Esta función se utiliza para escribir un arreglo unidimensional ordenado de T elementos de tipo entero. */
 {
-    int I;
-    for (I = 0; I < T; I++)
-        printf("\nA[%d]: %d", I, A[I]);
+int I;
+for (I=0; I<T; I++)
+    printf("\nA[%d]: %d", I, A[I]);
 }
 
-void Ordena(int A[], int T)
-/* La función Ordena utiliza el método de inserción directa para ordenar los elementos del arreglo unidimensional A. */
+void Elimina(int A[], int *T)
 {
-    int AUX, L, I;
-    for (I = 1; I < T; I++)
+int I = 0, K, L;
+while (I<(*T-1))
+{
+K=I+1;
+while (K<=(*T-1))
+{
+    if (A[I]== A[K])
     {
-        AUX = A[I];
-        L = I - 1;
-        while ((L >= 0) && (AUX < A[L]))
-        {
-            A[L + 1] = A[L];
-            L--;
-        }
-        A[L + 1] = AUX;
+        for (L=K; L<(*T-1); L++)
+            A[L]= A[L+1];
+        *T= *T-1;
     }
+    else
+        K++;
+    }
+    I++;
 }
+}
+

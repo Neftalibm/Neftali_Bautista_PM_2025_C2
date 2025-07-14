@@ -1,47 +1,23 @@
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
 
-/* Suma-cuadrados.
-El programa calcula la suma del cuadrado de los elementos de un arreglo
-unidimensional de 100 elementos de tipo real. */
-
-const int MAX = 10; /*lo reduje a 10 porque 100 era demasiado
-/* MAX se utiliza para reservar el espacio máximo que podrá ocupar el arreglo. */
-
-void Lectura(float *, int);          /* Prototipos de funciones. */
-double Suma(float *, int);
-
-void main(void)
+int main()
 {
-    float VEC[MAX];
-    double RES;
-
-    Lectura(VEC, MAX);
-    RES = Suma(VEC, MAX);
-    /* Se llama a la función Suma y se almacena el resultado en la variable RES. */
-    printf("\n\nSuma del arreglo: %.2lf", RES);
+int ELE[5]={0};
+int I, VOT;
+printf("\nIngresa el primer voto (0 - para terminar): ");
+scanf("%d", &VOT);
+while (VOT)
+{
+    if ((VOT>0)&&(VOT<6))
+    ELE[VOT-1]++;
+    else
+        printf("\nEl voto ingresado es incorrecto.\n");
+    printf("Ingresa el siguiente voto (0 - Para terminar): ");
+    scanf("%d", &VOT);
 }
-
-void Lectura(float A[], int T)
-/* La función Lectura se utiliza para leer un arreglo unidimensional de T
-elementos de tipo real. */
-{
-    int I;
-    for (I = 0; I < T; I++)
-    {
-        printf("Ingrese el elemento %d: ", I + 1);
-        scanf("%f", &A[I]);
-    }
-}
-
-double Suma(float A[], int T)
-/* La función Suma se utiliza para calcular la suma del cuadrado de los
-componentes de un arreglo unidimensional de T elementos de tipo real. */
-{
-    int I;
-    double AUX = 0.0;
-    for (I = 0; I < T; I++)
-        AUX += pow(A[I], 2);
-
-    return AUX;
+printf("\n\nResultados de la Eleccion\n");
+for (I=0; I<=4; I++)
+printf("\nCandidato %d %d", I+1, ELE[I]);
+return 0;
 }

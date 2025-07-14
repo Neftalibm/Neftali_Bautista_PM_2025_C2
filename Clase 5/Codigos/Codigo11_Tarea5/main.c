@@ -1,23 +1,55 @@
 #include <stdio.h>
-/* Apuntadores y arreglos */
-void main(void)
+#include <stdlib.h>
+
+const int MAX=100;
+
+void Lectura(int[], int);
+int Binaria(int *, int, int);
+
+int main()
 {
-int V1[4] = {2, 3, 4, 7}, V2[4] = {6};
-int *AX, *AY;
+int RES, ELE, TAM, VEC[MAX];
+do
+{
+    printf("Ingrese el tamanho del arreglo: ");
+    scanf("%d", &TAM);
+}
+while (TAM>MAX|| TAM<1);
+Lectura(VEC, TAM);
+printf("\nIngrese el elemento a buscar: ");
+scanf("%d", &ELE);
+RES = Binaria(VEC, TAM, ELE);
 
-AX = &V1[3];
-AY = &V2[2];
+if (RES)
+    printf("\nEl elemento se encuentra en la posicion: %d", RES+1);
+else
+    printf("\nEl elemento no se encuentra en el arreglo");
+    return 0;
+}
 
-V1[V2[0] - V1[2]] = *AY;
-*AY = *AX - V1[0];
+void Lectura(int A[], int T)
+{
+    int I;
+    for(I=0; I<T; I++)
+    {
+    printf("Ingrese el elemento %d: ", I+1);
+    scanf("%d", &A[I]);
+}
+}
 
-printf("\nV1[0]=%d V1[1]=%d V1[2]=%d V1[3]=%d \tV2[0]=%d V2[1]=%d V2[2]=%d V2[3]=%d",
-        V1[0], V1[1], V1[2], V1[3], V2[0], V2[1], V2[2], V2[3]);
-
-V2[1] = ++*AX;
-V2[3] = (*AY)++;
-*AX += 2;
-
-printf("\nV1[0]=%d V1[1]=%d V1[2]=%d V1[3]=%d \tV2[0]=%d V2[1]=%d V2[2]=%d V2[3]=%d",
-        V1[0], V1[1], V1[2], V1[3], V2[0], V2[1], V2[2], V2[3]);
+int Binaria(int A[], int T, int E)
+{
+int ELE, IZQ=0, CEN, DER = T-1, BAN=0;
+while ((IZQ <= DER)&& (!BAN))
+{
+    CEN=(IZQ+DER)/2;
+    if (E==A[CEN])
+        BAN=CEN;
+    else
+        if (E>A[CEN])
+        IZQ=CEN+1;
+    else
+        DER=CEN-1;
+}
+return(BAN);
 }

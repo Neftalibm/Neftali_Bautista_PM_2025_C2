@@ -1,134 +1,202 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
-/* Bienes raices.
-El programa maneja informacion sobre las propiedades que tiene una empresa
-de bienes raices de la ciudad de Lima, Peru, tanto para venta como para renta. */
+typedef struct
+{
 
-typedef struct {
-    char zona[20];
-    char calle[20];
-    char colo[20]; // Colonia
-} ubicacion;
-
-typedef struct {
-    char clave[5];
-    float scu;  // Superficie cubierta
-    float ste;  // Superficie terreno
-    char car[50];  // Caracteristicas
-    ubicacion ubi;
+    int clave;
+    char nombre[15];
     float precio;
-    char dispo; // Disponibilidad
-} propiedades;
+    int existencia;
+} producto;
 
-void Lectura(propiedades *, int);
-void F1(propiedades *, int);
-void F2(propiedades *, int);
+void Lectura(producto *, int);
+void Ventas(producto *, int);
+void Reabastecimiento(producto *, int);
+void Nuevos_Productos(producto *, int *);
+void Inventario(producto *, int);
 
-int main(void) {
-    propiedades PROPIE[100];
-    int TAM;
+void main(void)
+{
 
-    do {
-        printf("Ingrese el numero de propiedades: ");
+    producto INV[100];
+    int TAM, OPE;
+    do
+    {
+
+        printf("Ingrese el numero de productos: ");
         scanf("%d", &TAM);
-    } while (TAM > 100 || TAM < 1);
+    }
+    while (TAM > 100 || TAM < 1);
+    Lectura(INV, TAM);
+    printf("\nIngrese operacion a realizar. \n\t\t1 - Ventas \n\t\t2 - Reabastecimiento \n\t\t3 - Nuevos Productos \n\t\t4 - Inventario \n\t\t0 - Salir: ");
+    scanf("%d", &OPE);
+    while (OPE)
+    {
 
-    Lectura(PROPIE, TAM);
-    F1(PROPIE, TAM);
-    F2(PROPIE, TAM);
+        switch (OPE)
+        {
 
-    return 0;
+            case 1: Ventas(INV, TAM); break;
+            case 2: Reabastecimiento(INV, TAM); break;
+            case 3: Nuevos_Productos(INV, &TAM); break;
+            case 4: Inventario(INV, TAM); break;
+        }
+        printf("\nIngrese operacion a realizar. \n\t\t1 - Ventas \n\t\t2 - Reabastecimiento \n\t\t3 - Nuevos Productos \n\t\t4 - Inventario \n\t\t0 - Salir: ");
+        scanf("%d", &OPE);
+    }
 }
 
-void Lectura(propiedades A[], int T) {
+void Lectura(producto A[], int T)
+{
+
     int I;
-    for (I = 0; I < T; I++) {
-        printf("\n\tIngrese datos de la propiedad %d", I + 1);
+    for (I = 0; I < T; I++)
+    {
+
+        printf("\nIngrese informacion del producto %d", I + 1);
+        printf("\n\tClave: ");
+        scanf("%d", &A[I].clave);
         fflush(stdin);
-        printf("\nClave: ");
-        gets(A[I].clave);
-
-        printf("Superficie cubierta: ");
-        scanf("%f", &A[I].scu);
-
-        printf("Superficie terreno: ");
-        scanf("%f", &A[I].ste);
-
-        fflush(stdin);
-        printf("Caracteristicas: ");
-        gets(A[I].car);
-
-        printf("\tZona: ");
-        gets(A[I].ubi.zona);
-
-        printf("\tCalle: ");
-        gets(A[I].ubi.calle);
-
-        printf("\tColonia: ");
-        gets(A[I].ubi.colo);
-
-        printf("Precio: ");
+        printf("\tNombre: ");
+        gets(A[I].nombre);
+        printf("\tPrecio: ");
         scanf("%f", &A[I].precio);
-
-        fflush(stdin);
-        printf("Disponibilidad (Venta-V Renta-R): ");
-        scanf("%c", &A[I].dispo);
+        printf("\tExistencia: ");
+        scanf("%d", &A[I].existencia);
     }
 }
 
-void F1(propiedades A[], int T) {
-    int I;
-    printf("\n\t\tListado de Propiedades para Venta en Miraflores");
-    for (I = 0; I < T; I++) {
-        if ((A[I].dispo == 'V') && (strcmp(A[I].ubi.zona, "Miraflores") == 0)) {
-            if ((A[I].precio >= 450000) && (A[I].precio <= 650000)) {
-                printf("\nClave de la propiedad: ");
-                puts(A[I].clave);
-                printf("Superficie cubierta: %.2f\n", A[I].scu);
-                printf("Superficie terreno: %.2f\n", A[I].ste);
-                printf("Caracteristicas: ");
-                puts(A[I].car);
-                printf("Calle: ");
-                puts(A[I].ubi.calle);
-                printf("Colonia: ");
-                puts(A[I].ubi.colo);
-                printf("Precio: %.2f\n", A[I].precio);
+void Ventas(producto A[], int T)
+{
+
+    int CLA, CAN, I, RES;
+    float TOT, PAR;
+    printf("\nIngrese clave del producto -0 para salir-: ");
+    scanf("%d", &CLA);
+    TOT = 0.0;
+    while (CLA)
+    {
+
+        printf("\tCantidad: ");
+        scanf("%d", &CAN);
+        I = 0;
+        while ((I < T) && (A[I].clave < CLA))
+                I++;
+                if ((I == T) || (A[I].clave > CLA))
+                printf("\nLa clave del producto es incorrecta");
+                        else if (A[I].existencia >= CAN)
+                        {
+
+            A[I].existencia -= CAN;
+            PAR = A[I].precio * CAN;
+            TOT += PAR;
+                        }
+        else
+        {
+
+            printf("\nNo existe en inventario la cantidad solicitada. Solo hay %d", A[I].existencia);
+            printf(" \nLos lleva 1 - Si   0 - No?: ");
+            scanf("%d", &RES);
+            if (RES)
+            {
+
+                PAR = A[I].precio * A[I].existencia;
+                A[I].existencia = 0;
+                TOT += PAR;
             }
         }
+        printf("\nIngrese la siguiente clave del producto -0 para salir-: ");
+        scanf("%d", &CLA);
+    }
+    printf("\nTotal de la venta: %f", TOT);
+}
+
+void Reabastecimiento(producto A[], int T)
+{
+
+    int CLA, CAN, I;
+    printf("\nIngrese clave del producto -0 para salir-: ");
+    scanf("%d", &CLA);
+    while (CLA)
+    {
+
+        I = 0;
+        while ((I < T) && (A[I].clave < CLA))
+                I++;
+                if ((I == T) || (A[I].clave > CLA))
+                printf("\nLa clave del producto ingresada es incorrecta");
+                        else
+                        {
+
+            printf("\tCantidad: ");
+            scanf("%d", &CAN);
+            A[I].existencia += CAN;
+                        }
+        printf("\nIngrese otra clave del producto -0 para salir-: ");
+        scanf("%d", &CLA);
     }
 }
 
-void F2(propiedades A[], int T) {
+void Nuevos_Productos(producto A[], int *T)
+{
+
+    int CLA, I, J;
+    printf("\nIngrese clave del producto -0 para salir-: ");
+    scanf("%d", &CLA);
+    while ((*T < 30) && (CLA))
+    {
+
+        I = 0;
+        while ((I < *T) && (A[I].clave < CLA))
+                I++;
+                if (I == *T)
+                {
+
+            A[I].clave = CLA;
+            printf("\tNombre: ");
+            fflush(stdin);
+            gets(A[I].nombre);
+            printf("\tPrecio: ");
+            scanf("%f", &A[I].precio);
+            printf("\tCantidad: ");
+            scanf("%d", &A[I].existencia);
+            *T = *T + 1;
+                }
+        else if (A[I].clave == CLA)
+                printf("\nEl producto ya se encuentra en el inventario");
+                else
+                {
+
+            for (J = *T; J > I; J--)
+                    A[J] = A[J - 1];
+                        A[I].clave = CLA;
+            printf("\tNombre: ");
+            fflush(stdin);
+            gets(A[I].nombre);
+            printf("\tPrecio: ");
+            scanf("%f", &A[I].precio);
+            printf("\tCantidad: ");
+            scanf("%d", &A[I].existencia);
+            *T = *T + 1;
+                }
+        printf("\nIngrese otra clave de producto -0 para salir-: ");
+        scanf("%d", &CLA);
+    }
+    if (*T == 30)
+            printf("\nYa no hay espacio para incorporar nuevos productos");
+}
+
+void Inventario(producto A[], int T)
+{
+
     int I;
-    float li, ls;
-    char zon[20];
+    for (I = 0; I < T; I++)
+    {
 
-    printf("\n\t\tListado de Propiedades para Renta");
-    printf("\nIngrese zona geografica: ");
-    fflush(stdin);
-    gets(zon);
-
-    printf("Ingrese el limite inferior del precio: ");
-    scanf("%f", &li);
-    printf("Ingrese el limite superior del precio: ");
-    scanf("%f", &ls);
-
-    for (I = 0; I < T; I++) {
-        if ((A[I].dispo == 'R') && (strcmp(A[I].ubi.zona, zon) == 0)) {
-            if ((A[I].precio >= li) && (A[I].precio <= ls)) {
-                printf("\nClave de la propiedad: ");
-                puts(A[I].clave);
-                printf("Superficie cubierta: %.2f\n", A[I].scu);
-                printf("Superficie terreno: %.2f\n", A[I].ste);
-                printf("Caracteristicas: ");
-                puts(A[I].car);
-                printf("Calle: ");
-                puts(A[I].ubi.calle);
-                printf("Colonia: ");
-                puts(A[I].ubi.colo);
-                printf("Precio: %.2f\n", A[I].precio);
-            }
-        }
+        printf("\nClave: %d", A[I].clave);
+        printf("\tNombre: %s", A[I].nombre);
+        printf("\tPrecio: %.2f", A[I].precio);
+        printf("\tExistencia: %d \n", A[I].existencia);
     }
 }

@@ -1,22 +1,54 @@
 #include <stdio.h>
-/* Apuntadores y arreglos */
-void main(void)
+#include <stdlib.h>
+
+const int MAX=100;
+
+void Lectura(int[], int);
+int Busca(int *, int, int);
+
+int main()
 {
-int X = 5, Y = 8, V[5] = {1, 3, 5, 7, 9};
-int *AY, *AX;
+int RES, ELE, TAM, VEC[MAX];
+do
+{
+    printf("Ingrese el tamanho del arreglo: ");
+    scanf("%d", &TAM);
+}
+while (TAM>MAX|| TAM<1);
+Lectura(VEC, TAM);
+printf("\nIngrese el elemento a buscar: ");
+scanf("%d", &ELE);
+RES = Busca(VEC, TAM, ELE);
 
-AY = &Y;
-X = *AY;
-*AY = V[3] + V[2];
+if (RES)
+    printf("\nEl elemento se encuentra en el arreglo");
+else
+    printf("\nEl elemento no se encuentra en el arreglo");
+    return 0;
+}
 
-printf("\nX=%d Y=%d V[0]=%d  V[1]=%d V[2]=%d  V[3]=%d V[4]=%d",
-        X, Y, V[0], V[1], V[2], V[3], V[4]);
+void Lectura(int A[], int T)
+{
+int I;
+for (I=0; I<T; I++)
+{
+    printf("Ingrese el elemento %d: ", I+1);
+    scanf("%d", &A[I]);
+}
+}
 
-AX = &V[V[0] * V[1]];
-X = *AX;
-Y = *AX * V[1];
-*AX = *AY - 3;
+int Busca(int A[], int T, int E)
+{
+int RES, I=0, BAN=0;
+while ((I < T) && !BAN) //tuve q investigar ete error -_-
 
-printf("\nX=%d Y=%d V[0]=%d  V[1]=%d V[2]=%d  V[3]=%d V[4]=%d",
-           X, Y, V[0], V[1], V[2], V[3], V[4]);
+    if (A[I]==E)
+    BAN++;
+    else
+        I++;
+if (BAN)
+    RES=I+1;
+else
+    RES=BAN;
+return(RES);
 }

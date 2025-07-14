@@ -1,47 +1,32 @@
 #include <stdio.h>
-#include <string.h>
-/* Cadena invertida.
-El programa obtiene la cadena invertida. */
-char *inverso(char *); /* Prototipo de funcion. */
+#include <stdlib.h>
+#include <ctype.h>
 
-int main(void)
+void interpreta(char *);
+
+void main(void)
 {
-    char fra[50], aux[50];
-    printf("\nIngrese la linea de texto: ");
-    fgets(fra, sizeof(fra), stdin);
 
-    // Eliminar el salto de linea si existe
-    int i = 0;
-    while (fra[i] != '\0') {
-        if (fra[i] == '\n') {
-            fra[i] = '\0';
-            break;
-        }
-        i++;
-    }
-
-    strcpy(aux, inverso(fra)); /* Se copia a aux el resultado de la funcion inverso. */
-    printf("\nEscribe la linea de texto en forma inversa: ");
-    puts(aux);
-
-    return 0;
+ char cad[50];
+ printf("\nIngrese la cadena de caracteres: ");
+ gets(cad);
+ interpreta(cad);
 }
 
-char *inverso(char *cadena)
-/* La funcion calcula el inverso de una cadena y regresa el resultado al
-programa principal. */
+void interpreta(char *cad)
 {
-    int i = 0, j, lon;
-    char cad;
-    lon = strlen(cadena);
-    j = lon - 1;
-    while (i < j)
-    {
-        cad = cadena[i];
-        cadena[i] = cadena[j];
-        cadena[j] = cad;
-        i++;
-        j--;
-    }
-    return cadena;
+
+ int i = 0, j, k;
+ while (cad[i] != '\0')
+ {
+
+  if (isalpha(cad[i]))
+  {
+
+   k = cad[i - 1] - 48;
+   for (j = 0; j < k; j++)
+        putchar(cad[i]);
+  }
+  i++;
+ }
 }

@@ -1,63 +1,44 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-/* Búsqueda secuencial en arreglos desordenados. */
-const int MAX = 10;
+const int MAX=10;
+void Lectura(int VEC[], int T);
+void Imprime(int VEC[], int T);
+void Producto(int *X, int *Y, int *Z, int T);
 
-void Lectura(int *, int);                                  /* Prototipos de funciones. */
-int Busca(int *, int, int);
 
-void main(void)
+int main()
 {
-int RES, ELE, TAM, VEC[MAX];
-do
-{
-    printf("Ingrese el tamanho del arreglo: ");
-    scanf("%d", &TAM);
+int VE1[MAX], VE2[MAX], VE3[MAX];
+Lectura(VE1, MAX);
+Lectura(VE2, MAX);
+Producto(VE1, VE2, VE3, MAX);
+printf("\nProducto de los vectores");
+Imprime(VE3, MAX);
+    return 0;
 }
-while (TAM > MAX || TAM < 1);   /* Se verifica que el tamaño del arreglo sea correcto. */
-
-Lectura(VEC, TAM);
-
-printf("\nIngrese el elemento a buscar: ");
-scanf("%d", &ELE);
-
-RES = Busca(VEC, TAM, ELE);   /* Se llama a la función que busca en el arreglo. */
-
-if (RES)
-    /* Si RES tiene un valor verdadero —diferente de 0—, se escribe la posición en la que se encontró el elemento. */
-    printf("\nEl elemento se encuentra en la posición %d", RES);
-else
-    printf("\nEl elemento no se encuentra en el arreglo");
-}
-
-void Lectura(int A[], int T)
-/* La función Lectura se utiliza para leer un arreglo unidimensional de T elementos de tipo entero. */
+void Lectura(int VEC[], int T)
 {
 int I;
-for (I = 0; I < T; I++)
-    {
-    printf("Ingrese el elemento %d: ", I + 1);
-    scanf("%d", &A[I]);
-}
-}
-
-int Busca(int A[], int T, int K)
-/* Esta función localiza en el arreglo un elemento determinado. Si el elemento
-es encontrado, regresa la posición correspondiente. En caso contrario, regresa 0. */
+printf("\n");
+for (I=0; I<T; I++)
 {
-int I = 0, BAN = 0, RES;
-while (I < T && !BAN)
+    printf("Ingrese el elemento %d: ", I+1);
+    scanf("%d", &VEC[I]);
+}
+} //Dos años buscando que me faltaba ese bracket
+
+void Imprime(int VEC[], int T)
 {
-if (A[I] == K)
-        BAN++;
-else
-        I++;
+int I;
+for (I=0; I<T; I++)
+    printf("\nVEC[%d]: %d", I+1, VEC[I]);
 }
 
-if (BAN)
-    RES = I + 1;  /* Se asigna I + 1 dado que las posiciones en el arreglo comienzan desde cero. */
-else
-    RES = 0;
-
-return RES;
+void Producto(int *X, int *Y, int *Z, int T)
+{
+int I;
+for(I=0; I<T; I++)
+Z[I]= X[I] * Y[I];
 }
+
