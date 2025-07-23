@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1753303814 source:c:\users\nefco\documents\new folder\ajedrez_codigo\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
